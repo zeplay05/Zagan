@@ -50,7 +50,7 @@ let returnTimeout = null;
 const STATES = {
     1: {
         title: "เบบี๋...เค้าขอโทษ ดีกันได้มั้ย 🥺",
-        msg: "เค้าผิดไปแล้ว เค้าจะไม่กลับดึก\nไม่ปล่อยให้แบตหมดอีกแล้ว",
+        msg: "เค้าขอโทษที่เล่นเกมเสียง ดัง แล้วก็หงุดหงิดวีนใส่เบบี๋นะคะ",
         gif: "https://raw.githubusercontent.com/Einzigartige/loveme-app/main/assets/cry.gif",
         btnYes: "ยกโทษ",
         btnNo: "ไม่ยกโทษ",
