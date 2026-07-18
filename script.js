@@ -5,7 +5,7 @@ const CONFIG = {
     startDate: "2024-01-01",      // The date you started dating (YYYY-MM-DD)
     musicUrl: "https://www.youtube.com/watch?v=t1dvrcqlQgI&list=RDt1dvrcqlQgI&start_radio=1", // Background music URL
     lineMessageTemplate: "เค้าหายงอนตัวเองแล้วนะค้าบ รักที่สุดเลยยยย ❤️🥰", // Template message to send on Line
-    
+
     // GIFs from GitHub assets (high-speed, raw-accessible)
     gifSorry: "https://raw.githubusercontent.com/Einzigartige/loveme-app/main/assets/cry.gif",      // Cute crying/apologizing GIF
     gifHappy: "https://raw.githubusercontent.com/Einzigartige/loveme-app/main/assets/loveme.gif"        // Cute happy/hugging GIF
@@ -58,15 +58,15 @@ const STATES = {
     },
     2: {
         title: "ใจอ่อนหน่อยน้าา... 🥺",
-        msg: "เค้าสัญญาว่าจะปรับตัวเอง\nดีกันนนน",
+        msg: "เค้าสัญญาว่าจะปรับปรุงตัวเอง\nดีกันนนน",
         gif: "https://raw.githubusercontent.com/Einzigartige/loveme-app/main/assets/plz.gif",
         btnYes: "ใจอ่อน",
         btnNo: "ไม่ยกโทษ",
         nextStateOnNo: 3
     },
     3: {
-        title: "ใจอ่อนสักทีม้ายย... 🥺",
-        msg: "ใจอ่อนสักใช้ม้าย เค้าน่ารักใช้ป่าว ฮิฮิ\nให้อภัยเค้าแล้วใช่ม้าย",
+        title: "ใจอ่อนหน่อยได้ม้ายย... 🥺",
+        msg: "ใจอ่อนหน่อยน้าาา เค้าน่ารักใช่ป่าว อิอิ\nให้อภัยเค้าแล้วใช่ม้าย",
         gif: "https://raw.githubusercontent.com/Einzigartige/loveme-app/main/assets/sadface.gif",
         btnYes: "ใช่",
         btnNo: "ยังโกรธ",
@@ -96,7 +96,7 @@ if (ytId) {
 }
 
 // Global callback for YouTube API
-window.onYouTubeIframeAPIReady = function() {
+window.onYouTubeIframeAPIReady = function () {
     const ytId = getYouTubeId(CONFIG.musicUrl);
     ytPlayer = new YT.Player('youtube-player', {
         height: '200',
@@ -138,7 +138,7 @@ function init() {
         bgMusic.src = CONFIG.musicUrl;
         bgMusic.load();
     }
-    
+
     // Create floating hearts background
     createFloatingHearts();
 }
@@ -193,13 +193,13 @@ function changeState(stateNum) {
     currentState = stateNum;
     hoverCount = 0; // Reset chase count for new state
     canRunaway = false; // Temporarily disable runaway trigger
-    
+
     // Return button to normal position
     resetNoButton();
-    
+
     // Reset Yes button scale
     btnYes.style.transform = 'scale(1)';
-    
+
     // Render current state config
     const config = STATES[stateNum];
     if (config) {
@@ -209,7 +209,7 @@ function changeState(stateNum) {
         btnYes.textContent = config.btnYes;
         btnNo.textContent = config.btnNo;
     }
-    
+
     // Enable runaway after 500ms transition cooldown
     setTimeout(() => {
         canRunaway = true;
@@ -219,13 +219,13 @@ function changeState(stateNum) {
 // Welcome Screen -> State 1 Apology Screen
 btnStart.addEventListener('click', () => {
     playMusic();
-    
+
     welcomeScreen.classList.add('hidden');
     welcomeScreen.classList.remove('active');
-    
+
     // Initialize to State 1
     changeState(1);
-    
+
     apologyScreen.classList.remove('hidden');
     apologyScreen.offsetHeight;
     apologyScreen.classList.add('active');
@@ -235,14 +235,14 @@ btnStart.addEventListener('click', () => {
 btnYes.addEventListener('click', () => {
     apologyScreen.classList.add('hidden');
     apologyScreen.classList.remove('active');
-    
+
     // Return button to normal position
     resetNoButton();
-    
+
     successScreen.classList.remove('hidden');
     successScreen.offsetHeight;
     successScreen.classList.add('active');
-    
+
     playCelebrationConfetti();
     startRelationshipTimer();
 });
@@ -250,52 +250,52 @@ btnYes.addEventListener('click', () => {
 // --- RUNAWAY BUTTON LOGIC ---
 function moveNoButton() {
     if (!canRunaway) return;
-    
+
     if (hoverCount < MAX_HOVERS) {
         hoverCount++;
-        
+
         // Clear any return timer
         if (returnTimeout) {
             clearTimeout(returnTimeout);
             returnTimeout = null;
         }
-        
+
         // If reached max hovers, instead of moving away, return to card next to Yes button!
         if (hoverCount === MAX_HOVERS) {
             resetNoButton();
             return;
         }
-        
+
         // Yes Button grows slightly with each chase
         const baseScale = 1;
         const scaleFactor = 0.08;
         const newScale = baseScale + (hoverCount * scaleFactor);
         btnYes.style.transform = `scale(${Math.min(newScale, 1.4)})`;
-        
+
         if (!btnNo.classList.contains('btn-no-runaway')) {
             btnNo.classList.add('btn-no-runaway');
         }
-        
+
         // Append to body to break out of transformed parent container
         if (btnNo.parentElement !== document.body) {
             document.body.appendChild(btnNo);
         }
-        
+
         const btnWidth = btnNo.offsetWidth;
         const btnHeight = btnNo.offsetHeight;
-        
+
         const maxX = window.innerWidth - btnWidth - 40;
         const maxY = window.innerHeight - btnHeight - 40;
-        
+
         let randomX = Math.floor(Math.random() * maxX);
         let randomY = Math.floor(Math.random() * maxY);
-        
+
         if (randomX < 20) randomX = 20;
         if (randomY < 20) randomY = 20;
-        
+
         btnNo.style.left = randomX + 'px';
         btnNo.style.top = randomY + 'px';
-        
+
         // Set timer to automatically return home after 1.5 seconds of no hover
         returnTimeout = setTimeout(() => {
             resetNoButton();
@@ -347,21 +347,21 @@ musicPlayer.addEventListener('click', toggleMusic);
 function createFloatingHearts() {
     const container = document.getElementById('hearts-bg');
     const totalHearts = 20;
-    
+
     for (let i = 0; i < totalHearts; i++) {
         const heart = document.createElement('span');
         heart.classList.add('floating-heart');
-        
+
         // Random positioning & timing
         heart.style.left = Math.random() * 100 + '%';
         heart.style.animationDelay = Math.random() * 8 + 's';
         heart.style.animationDuration = (Math.random() * 5 + 5) + 's'; // between 5s to 10s
-        
+
         // Random size
         const size = Math.random() * 15 + 10; // 10px to 25px
         heart.style.width = size + 'px';
         heart.style.height = size + 'px';
-        
+
         container.appendChild(heart);
     }
 }
@@ -374,7 +374,7 @@ function playCelebrationConfetti() {
         spread: 80,
         origin: { y: 0.6 }
     });
-    
+
     // Burst 2: Left and right sides fireworks (running for 3 seconds)
     const duration = 4 * 1000;
     const animationEnd = Date.now() + duration;
@@ -384,7 +384,7 @@ function playCelebrationConfetti() {
         return Math.random() * (max - min) + min;
     }
 
-    const interval = setInterval(function() {
+    const interval = setInterval(function () {
         const timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
@@ -404,13 +404,13 @@ function startRelationshipTimer() {
     const hourVal = document.getElementById('hours-val');
     const minVal = document.getElementById('minutes-val');
     const secVal = document.getElementById('seconds-val');
-    
+
     const targetDate = new Date(CONFIG.startDate);
-    
+
     function updateCounter() {
         const now = new Date();
         const diffMs = now.getTime() - targetDate.getTime();
-        
+
         if (diffMs < 0) {
             dayVal.textContent = "0";
             hourVal.textContent = "0";
@@ -418,18 +418,18 @@ function startRelationshipTimer() {
             secVal.textContent = "0";
             return;
         }
-        
+
         const seconds = Math.floor(diffMs / 1000);
         const minutes = Math.floor(seconds / 60);
         const hours = Math.floor(minutes / 60);
         const days = Math.floor(hours / 24);
-        
+
         dayVal.textContent = days;
         hourVal.textContent = hours % 24;
         minVal.textContent = minutes % 60;
         secVal.textContent = seconds % 60;
     }
-    
+
     // Run immediately and then set interval
     updateCounter();
     setInterval(updateCounter, 1000);
