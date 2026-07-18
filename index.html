@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เค้าขอโทษนะตัวเอ๊งงง... 🥺❤️</title>
+    <!-- Font Awesome for cute icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background music element -->
+    <audio id="bg-music" loop></audio>
+    <!-- Hidden container for YouTube Player API -->
+    <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 200px; height: 200px; opacity: 0; pointer-events: none;"></div>
+
+    <!-- Floating music player in top-right -->
+    <div class="music-player" id="music-player" title="เล่น/หยุดเพลง">
+        <div class="disc" id="music-disc"></div>
+        <div class="music-waves">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Floating hearts animation container -->
+    <div class="hearts-bg" id="hearts-bg"></div>
+
+    <div class="container">
+        
+        <!-- SCREEN 1: Welcome Entrance -->
+        <div class="card active" id="welcome-screen">
+            <h1>เค้ามีอะไรจะบอกแหละ... 🥺</h1>
+            <div class="gif-container" style="background: none; box-shadow: none; width: 140px; height: 140px;">
+                <!-- Glowing heart icon -->
+                <i class="fa-solid fa-heart-pulse" style="font-size: 80px; color: var(--primary-color); animation: heartbeat 1.2s infinite;"></i>
+            </div>
+            <p class="message-text">มีจดหมายน้อยส่งถึงตัวเองน้าาา ลองกดเข้าไปอ่านดูสิคะ 💌</p>
+            <button class="btn btn-yes" id="btn-start">
+                <i class="fa-solid fa-envelope-open-text"></i> กดอ่านจดหมาย 💖
+            </button>
+        </div>
+
+        <!-- SCREEN 2: Apology Page -->
+        <div class="card hidden" id="apology-screen">
+            <h1 id="apology-title">หายงอนเค้านะตัวเอ๊งงง... 🥺</h1>
+            <div class="gif-container">
+                <img id="sorry-gif" class="gif-img" src="https://raw.githubusercontent.com/Einzigartige/loveme-app/main/assets/cry.gif" alt="Apologizing GIF">
+            </div>
+            <p class="message-text" id="apology-msg">
+                เค้าสัญญาว่าจะไม่ดื้อ ไม่ซน ไม่ทำให้ตัวเองต้องงอนบ่อยๆ อีกแล้วนะค้าบ หายงอนน้าคนเก่งนะๆๆ ❤️
+            </p>
+            <div class="buttons-wrapper">
+                <button class="btn btn-yes" id="btn-yes">
+                    หายงอนแล้วนะ ❤️‍🩹
+                </button>
+                <button class="btn btn-no" id="btn-no">
+                    ยังไม่หายหรอก! 😜
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: Celebration / Success Screen -->
+        <div class="card hidden" id="success-screen">
+            <h1 id="success-title">เย้! น่ารักที่สุดเลยยย 🎉</h1>
+            <div class="gif-container">
+                <img id="happy-gif" class="gif-img" src="https://raw.githubusercontent.com/Einzigartige/loveme-app/main/assets/loveme.gif" alt="Celebrating GIF">
+            </div>
+            <p class="message-text" id="success-msg">
+                เย้ มากอดๆนะคะเบบี้ เค้ารักเบบี้ที่สุดเลย
+            </p>
+            
+           
+        </div>
+
+    </div>
+
+    <!-- MODAL POPUP: Write Heart Message -->
+    <div class="modal" id="custom-message-modal">
+        <div class="modal-content">
+            <h3>เขียนความในใจถึงเค้า ✍️💖</h3>
+            <textarea class="modal-input" id="custom-msg-input" rows="4" placeholder="พิมพ์ข้อความในใจที่อยากบอกเค้าตรงนี้ได้เลยน้าา..."></textarea>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="btn btn-no" id="modal-close" style="padding: 8px 18px; font-size: 1rem;">ยกเลิก</button>
+                <button class="btn btn-yes" id="btn-modal-submit" style="padding: 8px 18px; font-size: 1rem;">ส่งข้อความ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyframe animation for heartbeat -->
+    <style>
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.12); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.12); }
+            70% { transform: scale(1); }
+        }
+    </style>
+
+    <!-- Canvas Confetti Library CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
